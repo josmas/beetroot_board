@@ -1,7 +1,6 @@
 var canvas, context;
 
-function draw(x,y){
-    createCoordMessage(x,y);
+function draw(x,y){    
     context.lineTo(x, y);
     context.stroke();
 }
@@ -67,6 +66,7 @@ window.addEventListener('load', function () {
             context.beginPath();
             context.moveTo(x, y);
         } else {
+            createCoordMessage(x,y);
             draw(x,y);
         }
     }
