@@ -1,6 +1,7 @@
 var canvas, context;
 
 function draw(x,y){
+    createCoordMessage(x,y);
     context.lineTo(x, y);
     context.stroke();
 }

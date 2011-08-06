@@ -57,13 +57,20 @@ function onClose(evt) {
 function onMessage(evt) {
     writeToScreen('<span style="color: blue;">RESPONSE: ' + evt.data + '</span>');
     decodeMessage(evt.data);
-    //websocket.close();
+//websocket.close();
 }
 
 function onError(evt) {
     writeToScreen('<span style="color: red;">ERROR:</span> ' + evt.data);
 }
 
+function createCoordMessage(x,y){
+    doSend(JSON.stringify({
+        "type": "broadcast",
+        "ns": "org.jWebSocket.plugins.system",
+        "data": {"x":x,"y":y}
+    }));
+}
 
 function doSend(message) {
     websocket.send(message);
@@ -88,8 +95,10 @@ function sendMessage() {
 }
 
 function decodeMessage(message) {
-  writeToScreen(JSON.parse(message).data);
-
+    a = JSON.parse(message);
+    writeToScreen(a.data.x);
+    writeToScreen(a.data.y);
+    draw(a.data.x, a.data.y);
 };
 
 window.addEventListener("load", init, false);
