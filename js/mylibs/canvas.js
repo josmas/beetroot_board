@@ -1,5 +1,11 @@
-window.addEventListener('load', function () {
-    var canvas, context;
+var canvas, context;
+
+function draw(x,y){
+    context.lineTo(x, y);
+    context.stroke();
+}
+
+window.addEventListener('load', function () {    
     var started = false;
 
     // Initialization sequence.
@@ -60,8 +66,7 @@ window.addEventListener('load', function () {
             context.beginPath();
             context.moveTo(x, y);
         } else {
-            context.lineTo(x, y);
-            context.stroke();
+            draw(x,y);
         }
     }
 
