@@ -1,8 +1,9 @@
-var canvas, context;
+var canvas, mycontext;
 
-function draw(x,y){    
-    context.lineTo(x, y);
-    context.stroke();
+function draw(x1, y1, x2, y2){
+    mycontext.moveTo(x1, y1);
+    mycontext.lineTo(x2, y2);
+    mycontext.stroke();
 }
 
 window.addEventListener('load', function () {    
@@ -26,8 +27,8 @@ window.addEventListener('load', function () {
         canvas.height=window.innerHeight;
 
         // Get the 2D canvas context.
-        context = canvas.getContext('2d');
-        if (!context) {
+        mycontext = canvas.getContext('2d');
+        if (!mycontext) {
             alert('Error: failed to getContext!');
             return;
         }
@@ -63,8 +64,8 @@ window.addEventListener('load', function () {
         // The event handler works like a drawing pencil which tracks the mouse 
         // movements. We start drawing a path made up of lines.
         if (!started) {
-            context.beginPath();
-            context.moveTo(x, y);
+            mycontext.beginPath();
+            
         } else {
             createCoordMessage(x,y);
             draw(x,y);

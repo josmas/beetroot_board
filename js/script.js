@@ -68,7 +68,10 @@ function createCoordMessage(x,y){
     doSend(JSON.stringify({
         "type": "broadcast",
         "ns": "org.jWebSocket.plugins.system",
-        "data": {"x":x,"y":y}
+        "data": {
+            "x":x,
+            "y":y
+        }
     }));
 }
 
@@ -95,10 +98,12 @@ function sendMessage() {
 }
 
 function decodeMessage(message) {
-    a = JSON.parse(message);
+    var a = JSON.parse(message);    
+    var lastPos = clients[a.sourceId];
+    clients[a.sourceId] = a.data;
     writeToScreen(a.data.x);
     writeToScreen(a.data.y);
-    draw(a.data.x, a.data.y);
+    draw(lastPos.x, lastPos.y, a.data.x, a.data.y);
 };
 
 window.addEventListener("load", init, false);
