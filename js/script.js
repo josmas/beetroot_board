@@ -56,6 +56,7 @@ function onClose(evt) {
 
 function onMessage(evt) {
     writeToScreen('<span style="color: blue;">RESPONSE: ' + evt.data + '</span>');
+    decodeMessage(evt.data);
     //websocket.close();
 }
 
@@ -86,5 +87,9 @@ function sendMessage() {
 
 }
 
+function decodeMessage(message) {
+  writeToScreen(JSON.parse(message).data);
+
+};
 
 window.addEventListener("load", init, false);
