@@ -41,7 +41,7 @@ window.addEventListener('load', function () {
         canvas.addEventListener('mouseup', ev_mouseup, false);
         canvas.addEventListener('touchmove', ev_mousemove, false);
         canvas.addEventListener('touchstart', ev_mousedown, false);
-        canvas.addEventListener('touchstop', ev_mouseup, false);	
+        canvas.addEventListener('touchend', ev_mouseup, false);	
     }
   
     function ev_mousedown(ev) {
@@ -55,6 +55,8 @@ window.addEventListener('load', function () {
     // The mousemove event handler.
   
     function ev_mousemove (ev) {
+        var touch = event.targetTouches[0];
+        
         var x1=lastX;
         var y1=lastY;
 	
@@ -66,8 +68,8 @@ window.addEventListener('load', function () {
             x2 = ev.offsetX;
             y2 = ev.offsetY;
         } else {
-            x2 = ev.pageX - canvas.offsetLeft;
-            y2 = ev.pageY - canvas.offsetTop;
+            x2 = touch.pageX;
+            y2 = touch.pageY;
         }
         
         
