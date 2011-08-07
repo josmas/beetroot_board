@@ -18,6 +18,7 @@ function draw(data){
         context.strokeStyle = data.strokeStyle;
     }
     
+    context.stroke();
 
 }
 
