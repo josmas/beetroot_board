@@ -57,8 +57,7 @@ window.addEventListener('load', function () {
     function ev_mousemove (ev) {
         var touch;
         if (ev.targetTouches) {
-            canvas.onmousemove = null;
-            touch = ev.targetTouches[0];
+            touch = ev.touches[0];
         }
         
         var x1=lastX;
@@ -86,6 +85,7 @@ window.addEventListener('load', function () {
             createCoordMessage(x1,y1,x2,y2);
             draw(x1,y1,x2,y2);
         }
+        ev.preventDefault();
     }
 
     canvas_init();
