@@ -56,7 +56,7 @@ window.addEventListener('load', function () {
   
     function ev_mousemove (ev) {
         var touch;
-        if (ev.touches) {
+        if (ev.targetTouches) {
             canvas.onmousemove = null;
             touch = ev.targetTouches[0];
         }
