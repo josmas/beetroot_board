@@ -65,7 +65,12 @@ window.addEventListener('load', function () {
         } else if (ev.offsetX || ev.offsetX == 0) { // Opera
             x2 = ev.offsetX;
             y2 = ev.offsetY;
+        } else {
+            x2 = ev.pageX;
+            y2 = ev.pageY;
         }
+        
+        
         lastX = x2;
         lastY = y2;
 
