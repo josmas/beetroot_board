@@ -22,11 +22,11 @@ function draw(data){
 
 }
 
-/**
- * 
- */
-function changeColor(color)
-{
+function clearCanvas() {
+  canvas.width = canvas.width;
+};
+
+function changeColor(color) {
     context.strokeStyle = color;
 }
 
