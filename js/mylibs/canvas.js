@@ -1,6 +1,7 @@
 var canvas, context;
 var lastX=0, lastY=0;
 
+
 function draw(data){
     context.beginPath();
     if(data.x1 && data.y1)
@@ -17,7 +18,7 @@ function draw(data){
         context.strokeStyle = data.strokeStyle;
     }
     
-    context.stroke();
+
 }
 
 /**
@@ -59,6 +60,9 @@ window.addEventListener('load', function () {
         canvas.addEventListener('mousemove', ev_mousemove, false);
         canvas.addEventListener('mousedown', ev_mousedown, false);
         canvas.addEventListener('mouseup', ev_mouseup, false);	
+        canvas.addEventListener('touchmove', ev_mousemove, false);
+        canvas.addEventListener('touchstart', ev_mousedown, false);
+        canvas.addEventListener('touchend', ev_mouseup, false);	
     }
   
     function ev_mousedown(ev) {
@@ -72,6 +76,11 @@ window.addEventListener('load', function () {
     // The mousemove event handler.
   
     function ev_mousemove (ev) {
+        var touch;
+        if (ev.targetTouches) {
+            touch = ev.touches[0];
+        }
+        
         var x1=lastX;
         var y1=lastY;
 	
@@ -82,10 +91,15 @@ window.addEventListener('load', function () {
         } else if (ev.offsetX || ev.offsetX == 0) { // Opera
             x2 = ev.offsetX;
             y2 = ev.offsetY;
+        } else {
+            x2 = touch.pageX;
+            y2 = touch.pageY;
         }
         
+
         x2 -= canvas.offsetLeft;
         y2 -= canvas.offsetTop;
+
         
         lastX = x2;
         lastY = y2;
@@ -101,9 +115,12 @@ window.addEventListener('load', function () {
         // The event handler works like a drawing pencil which tracks the mouse 
         // movements. We start drawing a path made up of lines.
         if (started) {
+
             createCoordMessage(x1,y1,x2,y2,context.strokeStyle);
             draw(data);
+
         }
+        ev.preventDefault();
     }
 
     canvas_init();
