@@ -1,8 +1,3 @@
-/* Author: 
-
-*/
-
-
 //TODO: put this in some kind of module -- global object is fine for now
 var wsUri = "ws://173.45.228.42:8787/";
 
@@ -58,7 +53,6 @@ function onClose(evt) {
 function onMessage(evt) {
     //writeToScreen('<span style="color: blue;">RESPONSE: ' + evt.data + '</span>');
     decodeMessage(evt.data);
-//websocket.close();
 }
 
 function onError(evt) {
@@ -90,22 +84,16 @@ function writeToScreen(message) {
 }
 
 function sendMessage() {
-
     doSend(JSON.stringify({
         "type": "broadcast",
         "ns": "org.jWebSocket.plugins.system",
         "data": "WebSocket are not too bad!",
         "senderIncluded" : "true"
     }));
-
 }
 
 function decodeMessage(message) {
-    var a = JSON.parse(message);    
-    //var lastPos = clients[a.sourceId];
-    //clients[a.sourceId] = a.data;
-    //writeToScreen(a.data.x);
-    //writeToScreen(a.data.y);
+    var a = JSON.parse(message);
     if (a.data !== undefined){
         draw(a.data.x1, a.data.y1, a.data.x2, a.data.y2);
     }
