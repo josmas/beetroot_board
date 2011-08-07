@@ -65,8 +65,8 @@ window.addEventListener('load', function () {
             y = ev.offsetY;
         } else {
 
-          x = e.pageX - cb_canvas.offsetLeft;
-          y = e.pageY - cb_canvas.offsetTop;
+          x = ev.pageX - cb_canvas.offsetLeft;
+          y = ev.pageY - cb_canvas.offsetTop;
         }
 
         // The event handler works like a drawing pencil which tracks the mouse 
