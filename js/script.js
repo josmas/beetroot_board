@@ -65,7 +65,7 @@ function onError(evt) {
     writeToScreen('<span style="color: red;">ERROR:</span> ' + evt.data);
 }
 
-function createCoordMessage(x1,y1,x2,y2){
+function createCoordMessage(x1,y1,x2,y2, strokeStyle){
     doSend(JSON.stringify({
         "type": "broadcast",
         "ns": "org.jWebSocket.plugins.system",
@@ -73,7 +73,8 @@ function createCoordMessage(x1,y1,x2,y2){
             "x1":x1,
             "y1":y1,
             "x2":x2,
-            "y2":y2
+            "y2":y2,
+            "strokeStyle":strokeStyle
         }
     }));
 }
@@ -107,8 +108,8 @@ function decodeMessage(message) {
     //writeToScreen(a.data.x);
     //writeToScreen(a.data.y);
     if (a.data !== undefined){
-        draw(a.data.x1, a.data.y1, a.data.x2, a.data.y2);
-    }
+        draw(a.data);
+    }    
 };
 
 window.addEventListener("load", init, false);

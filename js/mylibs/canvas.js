@@ -1,14 +1,34 @@
 var canvas, context;
 var lastX=0, lastY=0;
 
-function draw(x1, y1, x2, y2){
-    //context.beginPath();
-    context.moveTo(x1, y1);
-    context.lineTo(x2, y2);
+function draw(data){
+    context.beginPath();
+    if(data.x1 && data.y1)
+    {
+        context.moveTo(data.x1, data.y1);
+    }
+    
+    if(data.x2 && data.y2)
+    {
+        context.lineTo(data.x2, data.y2);
+    }  
+    
+    if(data.strokeStyle){
+        context.strokeStyle = data.strokeStyle;
+    }
+    
     context.stroke();
 }
 
-window.addEventListener('load', function () {    
+/**
+ * 
+ */
+function changeColor(color)
+{
+    context.strokeStyle = color;
+}
+
+window.addEventListener('load', function () {      
     var started = false;
 
     // Initialization sequence.
@@ -63,14 +83,26 @@ window.addEventListener('load', function () {
             x2 = ev.offsetX;
             y2 = ev.offsetY;
         }
+        
+        x2 -= canvas.offsetLeft;
+        y2 -= canvas.offsetTop;
+        
         lastX = x2;
         lastY = y2;
+        
+        var data = {
+            "x1":x1,
+            "y1":y1,
+            "x2":x2,
+            "y2":y2,
+            "strokeStyle": context.strokeStyle
+        };
 
         // The event handler works like a drawing pencil which tracks the mouse 
         // movements. We start drawing a path made up of lines.
         if (started) {
-            createCoordMessage(x1,y1,x2,y2);
-            draw(x1,y1,x2,y2);
+            createCoordMessage(x1,y1,x2,y2,context.strokeStyle);
+            draw(data);
         }
     }
 

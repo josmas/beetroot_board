@@ -23,6 +23,7 @@
         <!-- CSS: implied media=all -->
         <!-- CSS concatenated and minified via ant build script-->
         <link rel="stylesheet" href="css/style.css">
+		<link rel="stylesheet" href="css/beetrootstyle.css">
         <!-- end CSS-->
 
         <!-- More ideas for your <head> here: h5bp.com/d/head-Tips -->
@@ -37,14 +38,18 @@
 
         <div id="container">
             <header>
-                <h1>Beetroot board</h1>
+                
             </header>
 			
-			<section>
-				 <input type="button" value="Red">
+			<section id="sidebar">
+				 <input type="button" value="Red" onClick="changeColor('red')">
+				 <input type="button" value="Yellow" onClick="changeColor('yellow')">
+				 <input type="button" value="Blue" onClick="changeColor('blue')">
+				 <input type="button" value="Green" onClick="changeColor('green')">
 			</section>
 
-            <canvas id="board" style="border:1px solid green; cursor:crosshair">
+            
+            <canvas id="board" style="border:1px solid green; cursor:crosshair" >
                 <p>Unfortunately, your browser is currently unsupported by our web 
 			application.  We are sorry for the inconvenience. Please use one of the 
 			supported browsers listed below, or draw the image you want using an 
@@ -56,6 +61,7 @@
                     <a href="http://www.konqueror.org">Konqueror</a>.
                 </p>
             </canvas>
+			
 
             <div id="chatLog">  
             </div><!-- #chatLog -->  
