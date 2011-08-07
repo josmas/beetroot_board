@@ -9,6 +9,11 @@ function draw(data){
       return;
     }
 
+	if ( data.postIt === true){
+      drawPostit();
+      return;
+    }
+	
     context.beginPath();
     if(data.x1 && data.y1)
     {
@@ -37,8 +42,12 @@ function changeColor(color) {
     context.strokeStyle = color;
 }
 
-function drawPostit(){    
-  
+function drawPostitBtn() {
+    createPostItMessage();
+	drawPostit();
+}
+
+function drawPostit(){    	
 	// draw yellow rectangle 
 	context.beginPath();
 	context.lineWidth = 2;

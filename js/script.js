@@ -90,6 +90,16 @@ function createClearMessage() {
     }));
 }
 
+function createPostItMessage() {
+    doSend(JSON.stringify({
+        "type": "broadcast",
+        "ns": "org.jWebSocket.plugins.system",
+        "data": {
+            "postIt":true
+        }
+    }));
+}
+
 function writeToScreen(message) {
     var pre = document.createElement("p");
     pre.style.wordWrap = "break-word";
