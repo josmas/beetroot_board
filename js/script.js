@@ -7,6 +7,9 @@ var clients;
 function init() {
 
     output = document.getElementById("chatLog");
+    if (typeof WebSocket === "undefined") {
+      alert("Websockets Not Supported!");
+    }
     testWebSocket();
 }
 

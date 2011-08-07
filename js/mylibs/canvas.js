@@ -82,8 +82,8 @@ window.addEventListener('load', function () {
         // The event handler works like a drawing pencil which tracks the mouse 
         // movements. We start drawing a path made up of lines.
         if (started) {
-            createCoordMessage(x1, y1, x2, y2);
             draw(x1, y1, x2, y2);
+            createCoordMessage(x1, y1, x2, y2);
         }
         ev.preventDefault();
     }
