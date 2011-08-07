@@ -1,4 +1,5 @@
 var canvas, context;
+var mycolor = "black";
 var lastX=0, lastY=0;
 
 
@@ -39,7 +40,7 @@ function clearCanvas() {
 };
 
 function changeColor(color) {
-    context.strokeStyle = color;
+    mycolor = color;
 }
 
 function drawPostitBtn() {
@@ -93,13 +94,14 @@ window.addEventListener('load', function () {
         // Attach the mousemove event handler.
         canvas.addEventListener('mousemove', ev_mousemove, false);
         canvas.addEventListener('mousedown', ev_mousedown, false);
-        canvas.addEventListener('mouseup', ev_mouseup, false);	
+        canvas.addEventListener('mouseup', ev_mouseup, false);        
         canvas.addEventListener('touchmove', ev_mousemove, false);
         canvas.addEventListener('touchstart', ev_mousedown, false);
         canvas.addEventListener('touchend', ev_mouseup, false);	
     }
   
     function ev_mousedown(ev) {
+        canvas.style.cursor="crosshair";
         started = true;
     }
 	
@@ -143,16 +145,14 @@ window.addEventListener('load', function () {
             "y1":y1,
             "x2":x2,
             "y2":y2,
-            "strokeStyle": context.strokeStyle
+            "strokeStyle": mycolor
         };
 
         // The event handler works like a drawing pencil which tracks the mouse 
         // movements. We start drawing a path made up of lines.
         if (started) {
-
-            createCoordMessage(x1,y1,x2,y2,context.strokeStyle);
+            createCoordMessage(x1,y1,x2,y2,mycolor);
             draw(data);
-
         }
         ev.preventDefault();
     }
