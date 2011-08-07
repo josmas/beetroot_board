@@ -1,8 +1,11 @@
 var canvas, context;
+var lastX=0, lastY=0;
 
-function draw(x,y){    
-    context.lineTo(x, y);
-    context.stroke();
+function draw(x1, y1, x2, y2){
+  context.beginPath();
+  context.moveTo(x1, y1);
+  context.lineTo(x2, y2);
+  context.stroke();
 }
 
 window.addEventListener('load', function () {    
@@ -36,11 +39,9 @@ window.addEventListener('load', function () {
         canvas.addEventListener('mousemove', ev_mousemove, false);
         canvas.addEventListener('mousedown', ev_mousedown, false);
         canvas.addEventListener('mouseup', ev_mouseup, false);	
-
-        // Attach the touch event handlers.
         canvas.addEventListener('touchmove', ev_mousemove, false);
-        canvas.addEventListener('touchdown', ev_mousedown, false);
-        canvas.addEventListener('touchup', ev_mouseup, false);	
+        canvas.addEventListener('touchstart', ev_mousedown, false);
+        canvas.addEventListener('touchend', ev_mouseup, false);	
     }
   
     function ev_mousedown(ev) {
@@ -54,30 +55,37 @@ window.addEventListener('load', function () {
     // The mousemove event handler.
   
     function ev_mousemove (ev) {
-        var x, y;
+        var touch;
+        if (ev.targetTouches) {
+            touch = ev.touches[0];
+        }
+        
+        var x1=lastX;
+        var y1=lastY;
 	
         // Get the mouse position relative to the canvas element.
         if (ev.layerX || ev.layerX == 0) { // Firefox
-            x = ev.layerX;
-            y = ev.layerY;
+            x2 = ev.layerX;
+            y2 = ev.layerY;
         } else if (ev.offsetX || ev.offsetX == 0) { // Opera
-            x = ev.offsetX;
-            y = ev.offsetY;
+            x2 = ev.offsetX;
+            y2 = ev.offsetY;
         } else {
-
-          x = ev.pageX - cb_canvas.offsetLeft;
-          y = ev.pageY - cb_canvas.offsetTop;
+            x2 = touch.pageX;
+            y2 = touch.pageY;
         }
+        
+        
+        lastX = x2;
+        lastY = y2;
 
         // The event handler works like a drawing pencil which tracks the mouse 
         // movements. We start drawing a path made up of lines.
-        if (!started) {
-            context.beginPath();
-            context.moveTo(x, y);
-        } else {
-            createCoordMessage(x,y);
-            draw(x,y);
+        if (started) {
+            createCoordMessage(x1, y1, x2, y2);
+            draw(x1, y1, x2, y2);
         }
+        ev.preventDefault();
     }
 
     canvas_init();
