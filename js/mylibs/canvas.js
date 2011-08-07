@@ -38,7 +38,10 @@ window.addEventListener('load', function () {
         // Attach the mousemove event handler.
         canvas.addEventListener('mousemove', ev_mousemove, false);
         canvas.addEventListener('mousedown', ev_mousedown, false);
-        canvas.addEventListener('mouseup', ev_mouseup, false);	
+        canvas.addEventListener('mouseup', ev_mouseup, false);
+        canvas.addEventListener('touchmove', ev_mousemove, false);
+        canvas.addEventListener('touchstart', ev_mousedown, false);
+        canvas.addEventListener('touchend', ev_mouseup, false);	
     }
   
     function ev_mousedown(ev) {
