@@ -1,10 +1,7 @@
 var canvas, context;
-var lastX=0, lastY=0;
 
-function draw(x1, y1, x2, y2){
-    //context.beginPath();
-    context.moveTo(x1, y1);
-    context.lineTo(x2, y2);
+function draw(x,y){    
+    context.lineTo(x, y);
     context.stroke();
 }
 
@@ -39,6 +36,11 @@ window.addEventListener('load', function () {
         canvas.addEventListener('mousemove', ev_mousemove, false);
         canvas.addEventListener('mousedown', ev_mousedown, false);
         canvas.addEventListener('mouseup', ev_mouseup, false);	
+
+        // Attach the touch event handlers.
+        canvas.addEventListener('touchmove', ev_mousemove, false);
+        canvas.addEventListener('touchdown', ev_mousedown, false);
+        canvas.addEventListener('touchup', ev_mouseup, false);	
     }
   
     function ev_mousedown(ev) {
@@ -52,25 +54,29 @@ window.addEventListener('load', function () {
     // The mousemove event handler.
   
     function ev_mousemove (ev) {
-        var x1=lastX;
-        var y1=lastY;
+        var x, y;
 	
         // Get the mouse position relative to the canvas element.
         if (ev.layerX || ev.layerX == 0) { // Firefox
-            x2 = ev.layerX;
-            y2 = ev.layerY;
+            x = ev.layerX;
+            y = ev.layerY;
         } else if (ev.offsetX || ev.offsetX == 0) { // Opera
-            x2 = ev.offsetX;
-            y2 = ev.offsetY;
+            x = ev.offsetX;
+            y = ev.offsetY;
+        } else {
+
+          x = e.pageX - cb_canvas.offsetLeft;
+          y = e.pageY - cb_canvas.offsetTop;
         }
-        lastX = x2;
-        lastY = y2;
 
         // The event handler works like a drawing pencil which tracks the mouse 
         // movements. We start drawing a path made up of lines.
-        if (started) {
-            createCoordMessage(x1,y1,x2,y2);
-            draw(x1,y1,x2,y2);
+        if (!started) {
+            context.beginPath();
+            context.moveTo(x, y);
+        } else {
+            createCoordMessage(x,y);
+            draw(x,y);
         }
     }
 
