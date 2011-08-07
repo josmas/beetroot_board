@@ -3,6 +3,12 @@ var lastX=0, lastY=0;
 
 
 function draw(data){
+    
+    if ( data.clear){
+      clearCanvas();
+      return;
+    }
+
     context.beginPath();
     if(data.x1 && data.y1)
     {
@@ -24,6 +30,7 @@ function draw(data){
 
 function clearCanvas() {
   canvas.width = canvas.width;
+  createClearMessage();
 };
 
 function changeColor(color) {

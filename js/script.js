@@ -80,6 +80,17 @@ function doSend(message) {
     websocket.send(message);
 }
 
+function createClearMessage() {
+    doSend(JSON.stringify({
+        "type": "broadcast",
+
+        "ns": "org.jWebSocket.plugins.system",
+        "data": {
+            "clear":true
+        }
+    }));
+}
+
 function writeToScreen(message) {
     var pre = document.createElement("p");
     pre.style.wordWrap = "break-word";
