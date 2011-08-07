@@ -55,7 +55,11 @@ window.addEventListener('load', function () {
     // The mousemove event handler.
   
     function ev_mousemove (ev) {
-        var touch = event.targetTouches[0];
+        var touch;
+        if (ev.touches) {
+            canvas.onmousemove = null;
+            touch = ev.targetTouches[0];
+        }
         
         var x1=lastX;
         var y1=lastY;
