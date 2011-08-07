@@ -1,9 +1,11 @@
-var canvas, mycontext;
+var canvas, context;
+var lastX=0, lastY=0;
 
 function draw(x1, y1, x2, y2){
-    mycontext.moveTo(x1, y1);
-    mycontext.lineTo(x2, y2);
-    mycontext.stroke();
+    //context.beginPath();
+    context.moveTo(x1, y1);
+    context.lineTo(x2, y2);
+    context.stroke();
 }
 
 window.addEventListener('load', function () {    
@@ -27,8 +29,8 @@ window.addEventListener('load', function () {
         canvas.height=window.innerHeight;
 
         // Get the 2D canvas context.
-        mycontext = canvas.getContext('2d');
-        if (!mycontext) {
+        context = canvas.getContext('2d');
+        if (!context) {
             alert('Error: failed to getContext!');
             return;
         }
@@ -50,25 +52,25 @@ window.addEventListener('load', function () {
     // The mousemove event handler.
   
     function ev_mousemove (ev) {
-        var x, y;
+        var x1=lastX;
+        var y1=lastY;
 	
         // Get the mouse position relative to the canvas element.
         if (ev.layerX || ev.layerX == 0) { // Firefox
-            x = ev.layerX;
-            y = ev.layerY;
+            x2 = ev.layerX;
+            y2 = ev.layerY;
         } else if (ev.offsetX || ev.offsetX == 0) { // Opera
-            x = ev.offsetX;
-            y = ev.offsetY;
+            x2 = ev.offsetX;
+            y2 = ev.offsetY;
         }
+        lastX = x2;
+        lastY = y2;
 
         // The event handler works like a drawing pencil which tracks the mouse 
         // movements. We start drawing a path made up of lines.
-        if (!started) {
-            mycontext.beginPath();
-            
-        } else {
-            createCoordMessage(x,y);
-            draw(x,y);
+        if (started) {
+            createCoordMessage(x1,y1,x2,y2);
+            draw(x1,y1,x2,y2);
         }
     }
 

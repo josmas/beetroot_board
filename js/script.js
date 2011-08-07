@@ -7,6 +7,7 @@
 var wsUri = "ws://173.45.228.42:8787/";
 
 var output;
+var clients;
 
 function init() {
 
@@ -64,13 +65,15 @@ function onError(evt) {
     writeToScreen('<span style="color: red;">ERROR:</span> ' + evt.data);
 }
 
-function createCoordMessage(x,y){
+function createCoordMessage(x1,y1,x2,y2){
     doSend(JSON.stringify({
         "type": "broadcast",
         "ns": "org.jWebSocket.plugins.system",
         "data": {
-            "x":x,
-            "y":y
+            "x1":x1,
+            "y1":y1,
+            "x2":x2,
+            "y2":y2
         }
     }));
 }
@@ -99,11 +102,13 @@ function sendMessage() {
 
 function decodeMessage(message) {
     var a = JSON.parse(message);    
-    var lastPos = clients[a.sourceId];
-    clients[a.sourceId] = a.data;
-    writeToScreen(a.data.x);
-    writeToScreen(a.data.y);
-    draw(lastPos.x, lastPos.y, a.data.x, a.data.y);
+    //var lastPos = clients[a.sourceId];
+    //clients[a.sourceId] = a.data;
+    //writeToScreen(a.data.x);
+    //writeToScreen(a.data.y);
+    if (a.data !== undefined){
+        draw(a.data.x1, a.data.y1, a.data.x2, a.data.y2);
+    }
 };
 
 window.addEventListener("load", init, false);
