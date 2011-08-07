@@ -4,8 +4,8 @@ var lastX=0, lastY=0;
 
 function draw(data){
     
-    if ( data.clear){
-      clearCanvas();
+    if ( data.clear === true){
+      canvas.width = canvas.width;
       return;
     }
 
