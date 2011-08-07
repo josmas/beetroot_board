@@ -37,6 +37,23 @@ function changeColor(color) {
     context.strokeStyle = color;
 }
 
+function drawPostit(){    
+  
+	// draw yellow rectangle 
+	context.beginPath();
+	context.lineWidth = 2;
+	context.strokeStyle = "black";
+	context.fillStyle = "yellow";
+	context.rect(100, 150, 300, 250);
+	context.fill();
+	context.stroke();
+	
+	context.fillStyle    = '#00f';
+	context.font         = 'italic 12px sans-serif';
+	context.textBaseline = 'top';
+	context.fillText  ('Post-it!', 110, 160);
+}
+
 window.addEventListener('load', function () {      
     var started = false;
 
